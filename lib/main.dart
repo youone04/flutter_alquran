@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
      
-      home: const MyHomePage(title: 'Home View'),
+      home: const MyHomePage(title: 'Daftar Surah'),
     );
   }
 }

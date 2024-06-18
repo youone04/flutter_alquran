@@ -18,6 +18,7 @@ class Introduction extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(
           title: const Text(title),
+          
         ),
         body: Center(
           child: Column(
@@ -46,7 +47,7 @@ class Introduction extends StatelessWidget {
               ),
               SizedBox(height: 30),
               ElevatedButton(
-                onPressed: () => Get.to(MyApp()),
+                onPressed: () => Get.to(() => MyApp()),
                 child: Text('GET STARTED'),
               )
             ],
