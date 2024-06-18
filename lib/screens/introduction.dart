@@ -1,58 +1,67 @@
-import 'package:alquran/main.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:lottie/lottie.dart';
+import 'package:alquran/main.dart';
 import 'package:get/get.dart';
-
-//https://www.youtube.com/watch?v=tEhzfG0NUf4&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=4
 
 class Introduction extends StatelessWidget {
   const Introduction({super.key});
 
   @override
   Widget build(BuildContext context) {
-    const String title = "Alqur'an Apps";
     return GetMaterialApp(
-      title: title,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text(title),
-          
-        ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Alqur'an Apps",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-              SizedBox(
-                height: 25,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 40),
-                child: Text(
-                  "Sesibuk itu kah kamu, sampai belum membaca Alqur'an?",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-              SizedBox(height: 10),
-              Container(
-                width: 300,
-                height: 300,
-                child: Lottie.asset('assets/lotties/quran.json'),
-              ),
-              SizedBox(height: 30),
-              ElevatedButton(
-                onPressed: () => Get.to(() => MyApp()),
-                child: Text('GET STARTED'),
-              )
-            ],
+      theme: ThemeData(useMaterial3: true),
+      home: const TabBarExample(),
+    );
+  }
+}
+
+class TabBarExample extends StatefulWidget {
+  const TabBarExample({super.key});
+
+  @override
+  State<TabBarExample> createState() => _TabBarExampleState();
+}
+
+class _TabBarExampleState extends State<TabBarExample> {
+  int _currentIndex = 0;
+  final List<Widget> _children = [
+    Center(
+      child: MyApp(),
+    ),
+    Center(
+      child: Text("It's rainy here"),
+    ),
+    Center(
+      child: Text("It's sunny here"),
+    ),
+  ];
+
+  void onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _children[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.cloud_outlined),
+            label: 'Al-Quran',
           ),
-        ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.beach_access_sharp),
+            label: 'Doa',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.brightness_5_sharp),
+            label: 'Sunny',
+          ),
+        ],
       ),
     );
   }
