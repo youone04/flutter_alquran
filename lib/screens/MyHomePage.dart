@@ -1,3 +1,4 @@
+import 'package:alquran/constants/color.dart';
 import 'package:alquran/screens/detailSurahView.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -28,46 +29,48 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(184, 241, 6, 233),
-        title: Text(
-          widget.title,
-          style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold
-            ),
+    return MaterialApp(
+      theme: appLight,
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            widget.title,
+            style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold
+              ),
+          ),
         ),
-      ),
-      body: FutureBuilder<List<Surah>>(
-        future: getAllSurah(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          if (!snapshot.hasData) {
-            return Text("Tidak ada data");
-          }
-          return ListView.builder(
-            itemCount: snapshot.data!.length,
-            itemBuilder: (context, index) {
-              Surah surah = snapshot.data![index];
-              return ListTile(
-                onTap: () => Get.to(() => DetailsurahView(), arguments: surah),
-                leading: CircleAvatar(
-                  child: Text("${surah.number}"),
-                ),
-                title: Text("${surah.name?.transliteration?.id ?? '-'}"),
-                subtitle: Text(
-                    "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}"),
-                trailing: Text("${surah.name?.short ?? '-'}"),
+        body: FutureBuilder<List<Surah>>(
+          future: getAllSurah(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
               );
-            },
-          );
-        },
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+            }
+            if (!snapshot.hasData) {
+              return Text("Tidak ada data");
+            }
+            return ListView.builder(
+              itemCount: snapshot.data!.length,
+              itemBuilder: (context, index) {
+                Surah surah = snapshot.data![index];
+                return ListTile(
+                  onTap: () => Get.to(() => DetailsurahView(), arguments: surah),
+                  leading: CircleAvatar(
+                    child: Text("${surah.number}"),
+                  ),
+                  title: Text("${surah.name?.transliteration?.id ?? '-'}"),
+                  subtitle: Text(
+                      "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}"),
+                  trailing: Text("${surah.name?.short ?? '-'}"),
+                );
+              },
+            );
+          },
+        ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

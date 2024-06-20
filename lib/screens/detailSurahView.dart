@@ -1,3 +1,4 @@
+import 'package:alquran/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran/data/models/detail_surah.dart' as detail;
@@ -23,10 +24,10 @@ class DetailsurahView extends StatelessWidget {
     }
 
     return MaterialApp(
+      theme: appLight,
       title: title,
       home: Scaffold(
         appBar: AppBar(
-          backgroundColor: Color.fromARGB(184, 241, 6, 233),
           title: const Text(title, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           leading: IconButton(

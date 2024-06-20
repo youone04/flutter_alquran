@@ -1,3 +1,4 @@
+import 'package:alquran/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/main.dart';
 import 'package:get/get.dart';
@@ -8,7 +9,7 @@ class Introduction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(useMaterial3: true),
+      theme: appLight,
       home: const TabBarExample(),
     );
   }
