@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:alquran/data/models/detail_surah.dart';
+import 'package:alquran/data/models/detail_surah.dart' as detail;
 import 'package:alquran/data/models/surah.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -13,13 +13,13 @@ class DetailsurahView extends StatelessWidget {
     final Surah surah = Get.arguments;
     const String title = "Detail Surah";
     String id = surah.number.toString();
-    Future<DetailSurah> getAllDetailSurah() async {
+    Future<detail.DetailSurah> getAllDetailSurah() async {
       Uri url = Uri.parse('https://api.quran.gading.dev/surah/$id');
       print(url);
       var res = await http.get(url);
       Map<String, dynamic> data =
           (json.decode(res.body) as Map<String, dynamic>)["data"];
-      return DetailSurah.fromJson(data);
+      return detail.DetailSurah.fromJson(data);
     }
 
     return MaterialApp(
@@ -66,7 +66,7 @@ class DetailsurahView extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
-            FutureBuilder<DetailSurah>(
+            FutureBuilder<detail.DetailSurah>(
               future: getAllDetailSurah(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -85,7 +85,7 @@ class DetailsurahView extends StatelessWidget {
                     if (snapshot?.data?.verses?.length == 0) {
                       return SizedBox();
                     }
-                    Verse? ayat = snapshot?.data?.verses![index];
+                    detail.Verse? ayat = snapshot?.data?.verses![index];
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [

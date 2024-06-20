@@ -1,3 +1,4 @@
+//https://api.quran.gading.dev/surah
 import 'dart:convert';
 
 Surah surahFromJson(String str) => Surah.fromJson(json.decode(str));
