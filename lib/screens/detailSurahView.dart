@@ -24,7 +24,7 @@ class DetailsurahView extends StatelessWidget {
     }
 
     return MaterialApp(
-      theme: appLight,
+      theme: themeLight,
       title: title,
       home: Scaffold(
         appBar: AppBar(

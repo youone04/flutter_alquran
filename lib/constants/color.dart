@@ -8,14 +8,38 @@ const appPurpleLight2 = Color(0xFFB9A2D8);
 const appWhite = Color(0xFFFAF8FC);
 const appOrange = Color(0xFFE6704A);
 
-ThemeData appLight = ThemeData(
+ThemeData themeLight = ThemeData(
   primaryColor: appPurple,
+  scaffoldBackgroundColor: Colors.white,
   appBarTheme: AppBarTheme(
     backgroundColor: appPurple,
   ),
+  textTheme: TextTheme(
+    titleLarge:  TextStyle(
+      color: appPurpleDark
+    ),
+    headlineLarge: TextStyle(
+      color: appPurpleDark
+    ),
+    headlineMedium: TextStyle(
+      color: appPurpleDark
+    ),
+    headlineSmall: TextStyle(
+      color: appPurpleDark
+    ),
+    bodySmall: TextStyle(
+      color: appPurpleDark
+    ),
+    bodyMedium: TextStyle(
+      color: appPurpleDark
+    ),
+    bodyLarge: TextStyle(
+      color: appPurpleDark
+    )
+  )
 );
 
-ThemeData appDark = ThemeData(
+ThemeData themeDark = ThemeData(
   primaryColor: appPurpleLight2,
   scaffoldBackgroundColor: appPurpleDark,
   appBarTheme: AppBarTheme(

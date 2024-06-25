@@ -9,7 +9,7 @@ class Introduction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: appLight,
+      theme: themeLight,
       home: const TabBarExample(),
     );
   }
