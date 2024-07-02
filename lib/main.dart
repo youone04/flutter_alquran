@@ -3,7 +3,7 @@ import 'package:alquran/screens/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/screens/MyHomePage.dart';
 import 'package:get/get.dart';
-//https://www.youtube.com/watch?v=1uDOFR5SzqU&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=10 10:00
+//https://www.youtube.com/watch?v=JhAPryccnaM&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=11
 //https://github.com/gadingnst/quran-api
 void main() {
   runApp(const MyApp());

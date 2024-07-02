@@ -18,6 +18,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  RxBool isDark = false.obs;
+
+
   Future<List<Surah>> getAllSurah() async {
     Uri url = Uri.parse('https://api.quran.gading.dev/surah');
     var res = await http.get(url);
@@ -31,6 +34,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    if(Get.isDarkMode){
+      isDark.value = true;
+    }
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -124,10 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-                TabBar(
-                  indicatorColor: appPurpleDark,
-                  labelColor: Get.isDarkMode ? appWhite : appPurpleDark,
-                  unselectedLabelColor: Colors.grey,
+              TabBar(
                   tabs: [
                     Tab(
                       text: "Surah",
@@ -162,13 +165,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               return ListTile(
                                 onTap: () => Get.to(() => DetailsurahView(),
                                     arguments: surah),
-                                leading: Container(
+                                leading: Obx( 
+                                  () => Container(
                                   height: 35,
                                   width: 35,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
                                     image: AssetImage(
-                                      Get.isDarkMode ? 
+                                      isDark.isTrue ? 
                                       "assets/images/diagonal_dark.png":
                                       "assets/images/diagonal_light.png"),
                                   )),
@@ -177,25 +181,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                       "${surah.number}",
                                       style: TextStyle(
                                           fontSize: 12,
-                                          color: Get.isDarkMode? appWhite : appPurpleDark,
                                           fontWeight: FontWeight.bold),
                                     ),
                                   ),
                                 ),
+                                ),
                                 title: Text(
                                   "${surah.name?.transliteration?.id ?? '-'}",
-                                  style: TextStyle(
-                                    color: Get.isDarkMode ? appWhite : appPurpleDark,
-                                  ),
                                 ),
                                 subtitle: Text(
                                   "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}",
+                                  style: TextStyle(
+                                    color: Colors.grey[500]
+                                  ),
                                 ),
                                 trailing: Text(
                                   "${surah.name?.short ?? '-'}",
-                                  style: TextStyle(
-                                    color: Get.isDarkMode ? appWhite : appPurpleDark,
-                                  ),
                                 ),
                               );
                             },
@@ -207,12 +208,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         itemBuilder: (context, index) {
                           return ListTile(
                             onTap: () {},
-                            leading: Container(
+                            leading: Obx(() => Container(
                               height: 35,
                               width: 35,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
-                                image: AssetImage(Get.isDarkMode ? 
+                                image: AssetImage(isDark.isTrue ? 
                                       "assets/images/diagonal_dark.png":
                                       "assets/images/diagonal_light.png"),
                               )),
@@ -221,15 +222,13 @@ class _MyHomePageState extends State<MyHomePage> {
                                   "${index + 1}",
                                   style: TextStyle(
                                       fontSize: 12,
-                                      color: appPurpleDark,
                                       fontWeight: FontWeight.bold),
                                 ),
                               ),
-                            ),
+                            ),),
                             title: Text(
                               "Juz ${index + 1}",
                               style: TextStyle(
-                                color: appPurpleDark,
                               ),
                             ),
                           );
@@ -243,6 +242,21 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            //change theme
+            Get.isDarkMode?
+            Get.changeTheme(themeLight):
+            Get.changeTheme(themeDark);
+            //change obx
+            isDark.toggle();
+          },
+          child: Obx( () => Icon(
+            Icons.color_lens,
+            color: isDark.isTrue ? appPurpleDark: appWhite,
+            ),
+          ),
+          ),
       );
   }
 }
