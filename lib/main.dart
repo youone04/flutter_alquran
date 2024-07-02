@@ -2,10 +2,11 @@ import 'package:alquran/constants/color.dart';
 import 'package:alquran/screens/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/screens/MyHomePage.dart';
-//https://www.youtube.com/watch?v=1uDOFR5SzqU&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=9
+import 'package:get/get.dart';
+//https://www.youtube.com/watch?v=1uDOFR5SzqU&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=10 10:00
 //https://github.com/gadingnst/quran-api
 void main() {
-  runApp(const Introduction());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +15,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: themeDark,
+      darkTheme: themeDark,
       home: const MyHomePage(title: "Al-Quran Apps"),
     );
   }

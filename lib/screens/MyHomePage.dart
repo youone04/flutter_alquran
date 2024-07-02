@@ -31,9 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: themeLight,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           centerTitle: true,
           title: Text(
@@ -49,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
         body: DefaultTabController(
           length: 3,
           child: Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start, //agar rata kiri
               children: [
@@ -128,7 +126,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
                 TabBar(
                   indicatorColor: appPurpleDark,
-                  labelColor: appPurpleDark,
+                  labelColor: Get.isDarkMode ? appWhite : appPurpleDark,
                   unselectedLabelColor: Colors.grey,
                   tabs: [
                     Tab(
@@ -164,20 +162,79 @@ class _MyHomePageState extends State<MyHomePage> {
                               return ListTile(
                                 onTap: () => Get.to(() => DetailsurahView(),
                                     arguments: surah),
-                                leading: CircleAvatar(
-                                  child: Text("${surah.number}"),
+                                leading: Container(
+                                  height: 35,
+                                  width: 35,
+                                  decoration: BoxDecoration(
+                                      image: DecorationImage(
+                                    image: AssetImage(
+                                      Get.isDarkMode ? 
+                                      "assets/images/diagonal_dark.png":
+                                      "assets/images/diagonal_light.png"),
+                                  )),
+                                  child: Center(
+                                    child: Text(
+                                      "${surah.number}",
+                                      style: TextStyle(
+                                          fontSize: 12,
+                                          color: Get.isDarkMode? appWhite : appPurpleDark,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
                                 ),
                                 title: Text(
-                                    "${surah.name?.transliteration?.id ?? '-'}"),
+                                  "${surah.name?.transliteration?.id ?? '-'}",
+                                  style: TextStyle(
+                                    color: Get.isDarkMode ? appWhite : appPurpleDark,
+                                  ),
+                                ),
                                 subtitle: Text(
-                                    "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}"),
-                                trailing: Text("${surah.name?.short ?? '-'}"),
+                                  "${surah.numberOfVerses} Ayat | ${surah.revelation?.id ?? '-'}",
+                                ),
+                                trailing: Text(
+                                  "${surah.name?.short ?? '-'}",
+                                  style: TextStyle(
+                                    color: Get.isDarkMode ? appWhite : appPurpleDark,
+                                  ),
+                                ),
                               );
                             },
                           );
                         },
                       ),
-                      Center(child: Text("Page 2")),
+                      ListView.builder(
+                        itemCount: 30,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            onTap: () {},
+                            leading: Container(
+                              height: 35,
+                              width: 35,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image: AssetImage(Get.isDarkMode ? 
+                                      "assets/images/diagonal_dark.png":
+                                      "assets/images/diagonal_light.png"),
+                              )),
+                              child: Center(
+                                child: Text(
+                                  "${index + 1}",
+                                  style: TextStyle(
+                                      fontSize: 12,
+                                      color: appPurpleDark,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ),
+                            title: Text(
+                              "Juz ${index + 1}",
+                              style: TextStyle(
+                                color: appPurpleDark,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                       Center(child: Text("Page 3"))
                     ],
                   ),
@@ -186,7 +243,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

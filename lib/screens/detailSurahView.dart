@@ -23,10 +23,7 @@ class DetailsurahView extends StatelessWidget {
       return detail.DetailSurah.fromJson(data);
     }
 
-    return MaterialApp(
-      theme: themeLight,
-      title: title,
-      home: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           title: const Text(title, style: TextStyle(color: Colors.white)),
           centerTitle: true,
@@ -155,7 +152,6 @@ class DetailsurahView extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
