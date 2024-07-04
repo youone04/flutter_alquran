@@ -3,7 +3,7 @@ import 'package:alquran/constants/color.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/screens/MyHomePage.dart';
 import 'package:get/get.dart';
-//https://www.youtube.com/watch?v=JhAPryccnaM&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=11
+//https://www.youtube.com/watch?v=luxbRl3Jc5Y&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=12
 //https://github.com/gadingnst/quran-api
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: themeDark,
+      theme: themeLight,
       darkTheme: themeDark,
       home: const MyHomePage(title: "Al-Quran Apps"),
     );

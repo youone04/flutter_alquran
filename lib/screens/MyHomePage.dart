@@ -66,7 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
                     gradient: const LinearGradient(
-                        colors: [appPurpleLight2, appPurpleLight1]),
+                        colors: [appPurpleLight2, appPurpleLight1]
+                    ),
                   ),
                   child: Material(
                     borderRadius: BorderRadius.circular(20),
