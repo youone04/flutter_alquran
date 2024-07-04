@@ -1,5 +1,5 @@
 import 'package:alquran/constants/color.dart';
-import 'package:alquran/screens/introduction.dart';
+// import 'package:alquran/screens/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/screens/MyHomePage.dart';
 import 'package:get/get.dart';

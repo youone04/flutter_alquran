@@ -33,7 +33,7 @@ class _LastState extends State<LastReadView> {
           title: const Text("Last Read", style: TextStyle(color: Colors.white)),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
             color: Colors.white,
             Icons.arrow_back_ios),
             onPressed: () {
@@ -41,7 +41,7 @@ class _LastState extends State<LastReadView> {
             },
           ),
         ),
-        body: Text("Last Read"),
+        body: const Text("Last Read"),
     )
   );
   }

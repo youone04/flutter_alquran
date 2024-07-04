@@ -33,7 +33,7 @@ class _PageState extends State<PageView> {
           title: const Text("Last Read", style: TextStyle(color: Colors.white)),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
             color: Colors.white,
             Icons.arrow_back_ios),
             onPressed: () {
@@ -41,7 +41,7 @@ class _PageState extends State<PageView> {
             },
           ),
         ),
-        body: Text("Last Read"),
+        body: const Text("Last Read"),
     )
   );
   }

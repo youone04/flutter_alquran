@@ -57,15 +57,15 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start, //agar rata kiri
               children: [
-                Text(
+                const Text(
                   "Assalamu'alikum",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(vertical: 20),
+                  margin: const EdgeInsets.symmetric(vertical: 20),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    gradient: LinearGradient(
+                    gradient: const LinearGradient(
                         colors: [appPurpleLight2, appPurpleLight1]),
                   ),
                   child: Material(
@@ -74,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: InkWell(
                       //biar bisa di klik
                       borderRadius: BorderRadius.circular(20),
-                      onTap: () => Get.to(LastReadView()),
+                      onTap: () => Get.to(const LastReadView()),
                       child: Container(
                         height: 150,
                         child: Stack(
@@ -93,8 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ),
                             ),
-                            Padding(
-                              padding: const EdgeInsets.all(20),
+                            const Padding(
+                              padding: EdgeInsets.all(20),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -130,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ),
                 ),
-              TabBar(
+              const TabBar(
                   tabs: [
                     Tab(
                       text: "Surah",
@@ -151,12 +151,12 @@ class _MyHomePageState extends State<MyHomePage> {
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return Center(
+                            return const Center(
                               child: CircularProgressIndicator(),
                             );
                           }
                           if (!snapshot.hasData) {
-                            return Text("Tidak ada data");
+                            return const Text("Tidak ada data");
                           }
                           return ListView.builder(
                             itemCount: snapshot.data!.length,
@@ -179,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   child: Center(
                                     child: Text(
                                       "${surah.number}",
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 12,
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -220,7 +220,7 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Center(
                                 child: Text(
                                   "${index + 1}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold),
                                 ),
@@ -228,13 +228,13 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),),
                             title: Text(
                               "Juz ${index + 1}",
-                              style: TextStyle(
+                              style: const TextStyle(
                               ),
                             ),
                           );
                         },
                       ),
-                      Center(child: Text("Page 3"))
+                     const Center(child: Text("Page 3"))
                     ],
                   ),
                 )

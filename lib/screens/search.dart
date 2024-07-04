@@ -25,7 +25,7 @@ class _SearchState extends State<SearchViews> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
      body: Text("search"),
     );
   }

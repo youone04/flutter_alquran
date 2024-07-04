@@ -28,7 +28,7 @@ class DetailsurahView extends StatelessWidget {
           title: const Text(title, style: TextStyle(color: Colors.white)),
           centerTitle: true,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
             color: Colors.white,
             Icons.arrow_back_ios),
             onPressed: () {
@@ -68,7 +68,7 @@ class DetailsurahView extends StatelessWidget {
               future: getAllDetailSurah(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -77,7 +77,7 @@ class DetailsurahView extends StatelessWidget {
                 }
                 return ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: snapshot.data!.verses!.length ?? 0,
                   itemBuilder: (context, index) {
                     if (snapshot?.data?.verses?.length == 0) {
@@ -102,7 +102,7 @@ class DetailsurahView extends StatelessWidget {
                                   children: [
                                     IconButton(
                                         onPressed: () {},
-                                        icon: Icon(
+                                        icon: const Icon(
                                             Icons.bookmark_add_outlined)),
                                     IconButton(
                                         onPressed: () {},
@@ -113,7 +113,7 @@ class DetailsurahView extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                       const SizedBox(
                           height: 20,
                         ),
                         Text(
@@ -121,27 +121,27 @@ class DetailsurahView extends StatelessWidget {
                           textAlign: TextAlign.end,
                           style: TextStyle(fontSize: 25),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         Text(
                           "${ayat?.text?.transliteration?.en}",
                           textAlign: TextAlign.end,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 18, fontStyle: FontStyle.italic),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 25,
                         ),
                         
                         Text(
                           "${ayat?.translation?.id}",
                           textAlign: TextAlign.justify,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                           ),
                         ),
-                         SizedBox(
+                         const SizedBox(
                           height: 50,
                         ),
                       ],
