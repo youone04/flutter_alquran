@@ -235,7 +235,8 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemBuilder: (context, index) {
                             juz.Juz detailJuz = snapshot.data![index];
                             return ListTile(
-                              onTap: () => Get.to(() => DetailjuzView()),
+                              onTap: () => Get.to(() => DetailjuzView(),
+                              arguments: detailJuz),
                               leading: Obx(
                                 () => Container(
                                   height: 35,
