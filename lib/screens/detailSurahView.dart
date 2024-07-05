@@ -74,21 +74,6 @@ class DetailsurahView extends StatelessWidget {
                 ),
               ),
             )),
-            // onTap: () => Get.defaultDialog(
-            //   contentPadding: const EdgeInsets.symmetric(
-            //     horizontal: 39,
-            //     vertical: 10),
-            //   title:  "Tafsir ${surah?.name?.transliteration?.id ?? '-'}",
-            //   titleStyle:  const TextStyle(
-            //     fontWeight: FontWeight.bold
-            //   ),
-            //   content: Container(
-            //     child: Text(
-            //       "${surah.tafsir?.id ?? "-"}",
-            //       textAlign: TextAlign.center,
-            //     ),
-            //   ),
-            // ),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
@@ -134,7 +119,8 @@ class DetailsurahView extends StatelessWidget {
                 );
               }
               if (!snapshot.hasData) {
-                return Text("Tidak ada data");
+                return Center(child: Text("Tidak ada data"),
+                );
               }
               return ListView.builder(
                 shrinkWrap: true,
@@ -190,10 +176,13 @@ class DetailsurahView extends StatelessWidget {
                       const SizedBox(
                         height: 20,
                       ),
-                      Text(
-                        "${ayat?.text?.arab}",
-                        textAlign: TextAlign.end,
-                        style: const TextStyle(fontSize: 25),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Text(
+                          "${ayat?.text?.arab}",
+                          textAlign: TextAlign.end,
+                          style: const TextStyle(fontSize: 25),
+                        ),
                       ),
                       const SizedBox(
                         height: 10,
