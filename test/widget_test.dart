@@ -7,6 +7,7 @@
 import 'dart:convert';
 import 'package:alquran/data/models/ayat.dart';
 import 'package:alquran/data/models/detail_surah.dart';
+import 'package:alquran/data/models/juz.dart';
 import 'package:alquran/data/models/surah.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_test/flutter_test.dart';
@@ -35,21 +36,34 @@ void main() async{
   // print(hasil);
 
   //ayat
-  Uri url = Uri.parse('https://api.quran.gading.dev/surah/108/1');
-  var res = await http.get(url);
-  Map<String, dynamic> data = json.decode(res.body)["data"];
-  // data tanpa key surah
-  Map<String ,dynamic>  dataToModel =  {
-    "number" : data["number"],
-    "meta" : data["meta"],
-    "text" : data["text"],
-    "translation" : data["translation"],
-    "audio" : data["audio"],
-    "tafsir" : data["tafsir"]
-  };
+  // Uri url = Uri.parse('https://api.quran.gading.dev/surah/108/1');
+  // var res = await http.get(url);
+  // Map<String, dynamic> data = json.decode(res.body)["data"];
+  // // data tanpa key surah
+  // Map<String ,dynamic>  dataToModel =  {
+  //   "number" : data["number"],
+  //   "meta" : data["meta"],
+  //   "text" : data["text"],
+  //   "translation" : data["translation"],
+  //   "audio" : data["audio"],
+  //   "tafsir" : data["tafsir"]
+  // };
 
-  //convert Map to model
-  Ayat ayat = Ayat.fromJson(dataToModel);
-  print(ayat.tafsir.id.short);
+  // //convert Map to model
+  // Ayat ayat = Ayat.fromJson(dataToModel);
+  // print(ayat.tafsir.id.short);
+
+  //juz
+   List<Juz> allJuz = [];
+    for (int i = 1; i <= 5; i++) {
+      Uri url = Uri.parse('https://api.quran.gading.dev/juz/$i');
+      var res = await http.get(url);
+      Map<String, dynamic> data =
+          (json.decode(res.body) as Map<String, dynamic>)["data"];
+
+      Juz myJuzz = Juz.fromJson(data);
+      // print(myJuzz);
+      // allJuz.add(data);
+    }
 }
 
