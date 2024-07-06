@@ -119,7 +119,7 @@ class DetailsurahView extends StatelessWidget {
                 );
               }
               if (!snapshot.hasData) {
-                return Center(child: Text("Tidak ada data"),
+                return const Center(child: Text("Tidak ada data"),
                 );
               }
               return ListView.builder(

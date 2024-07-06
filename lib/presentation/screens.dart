@@ -1,0 +1,1 @@
+export 'package:alquran/presentation/home/home.screen.dart';

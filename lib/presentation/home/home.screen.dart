@@ -1,69 +1,26 @@
-import 'dart:ffi';
-
 import 'package:alquran/constants/color.dart';
-import 'package:alquran/data/models/juz.dart' as juz;
-import 'package:alquran/screens/detailJuz.dart';
+import 'package:alquran/data/models/surah.dart';
+import 'package:alquran/presentation/detail_juz/detail_juz.screen.dart';
 import 'package:alquran/screens/detailSurahView.dart';
 import 'package:alquran/screens/lastRead.dart';
 import 'package:alquran/screens/search.dart';
 import 'package:flutter/material.dart';
-import 'package:get_cli/common/utils/json_serialize/json_ast/utils/grapheme_splitter.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:alquran/data/models/surah.dart';
+import 'package:alquran/data/models/juz.dart' as juz;
+
+
 import 'package:get/get.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+import 'controllers/home.controller.dart';
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  List<Surah> allSurah = [];
-  RxBool isDark = false.obs;
-
-  //surah
-  Future<List<Surah>> getAllSurah() async {
-    Uri url = Uri.parse('https://api.quran.gading.dev/surah');
-    var res = await http.get(url);
-    List data = (json.decode(res.body) as Map<String, dynamic>)["data"];
-    if (data == null || data.isEmpty) {
-      return [];
-    } else {
-      allSurah = data.map((e) => Surah.fromJson(e)).toList();
-      return allSurah;
-    }
-  }
-
-  //juz
-  Future<List<juz.Juz>> getAllJuz() async {
-    List<juz.Juz> allJuz = [];
-    for (int i = 1; i <= 30; i++) {
-      Uri url = Uri.parse('https://api.quran.gading.dev/juz/$i');
-      var res = await http.get(url);
-      Map<String, dynamic> data =
-          (json.decode(res.body) as Map<String, dynamic>)["data"];
-      juz.Juz myJuzz = juz.Juz.fromJson(data);
-      // print(myJuzz);
-      allJuz.add(myJuzz);
-    }
-    return allJuz;
-  }
-
+class HomeScreen extends GetView<HomeController> {
+  const HomeScreen({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    if (Get.isDarkMode) {
-      isDark.value = true;
-    }
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          widget.title,
+        title: const Text(
+          "Al-Quran Apps",
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -168,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: TabBarView(
                   children: [
                     FutureBuilder<List<Surah>>(
-                      future: getAllSurah(),
+                      future: controller.getAllSurah(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -192,7 +149,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   width: 35,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
-                                    image: AssetImage(isDark.isTrue
+                                    image: AssetImage(controller.isDark.isTrue
                                         ? "assets/images/diagonal_dark.png"
                                         : "assets/images/diagonal_light.png"),
                                   )),
@@ -222,7 +179,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       },
                     ),
                     FutureBuilder<List<juz.Juz>>(
-                      future: getAllJuz(),
+                      future: controller.getAllJuz(),
                       builder: (context, snapshot) {
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
@@ -241,7 +198,7 @@ class _MyHomePageState extends State<MyHomePage> {
                            String nameEnd =  detailJuz.juzEndInfo?.split(" - ").first ?? "";
                            List<Surah> rawAllSurahInJuz = [];
                            List<Surah> allSurahInJuz = [];
-                           for (Surah item in allSurah) {
+                           for (Surah item in controller.allSurah) {
                             rawAllSurahInJuz.add(item);
                              if(item.name.transliteration!.id == nameEnd){
                               break;
@@ -254,10 +211,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               break;
                              }
                            }
-
-
                             return ListTile(
-                              onTap: () => Get.to(() => const DetailjuzView(),
+                              onTap: () => Get.to(() => DetailJuzScreen(),
                               arguments: {
                                "juz" : detailJuz,
                                "surah" : allSurahInJuz.reversed.toList(),
@@ -268,7 +223,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   width: 35,
                                   decoration: BoxDecoration(
                                       image: DecorationImage(
-                                    image: AssetImage(isDark.isTrue
+                                    image: AssetImage(controller.isDark.isTrue
                                         ? "assets/images/diagonal_dark.png"
                                         : "assets/images/diagonal_light.png"),
                                   )),
@@ -324,12 +279,12 @@ class _MyHomePageState extends State<MyHomePage> {
               ? Get.changeTheme(themeLight)
               : Get.changeTheme(themeDark);
           //change obx
-          isDark.toggle();
+         controller.isDark.toggle();
         },
         child: Obx(
           () => Icon(
             Icons.color_lens,
-            color: isDark.isTrue ? appPurpleDark : appWhite,
+            color:controller.isDark.isTrue ? appPurpleDark : appWhite,
           ),
         ),
       ),
