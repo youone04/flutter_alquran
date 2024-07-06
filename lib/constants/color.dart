@@ -11,14 +11,14 @@ const appOrange = Color(0xFFE6704A);
 ThemeData themeLight = ThemeData(
     brightness: Brightness.light,
     floatingActionButtonTheme:
-        FloatingActionButtonThemeData(backgroundColor: appPurpleDark),
+        const FloatingActionButtonThemeData(backgroundColor: appPurpleDark),
     primaryColor: appPurple,
     scaffoldBackgroundColor: Colors.white,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       elevation: 4,
       backgroundColor: appPurple,
     ),
-    textTheme: TextTheme(
+    textTheme: const TextTheme(
         titleLarge: TextStyle(color: appPurpleDark),
         headlineLarge: TextStyle(color: appPurpleDark),
         headlineMedium: TextStyle(color: appPurpleDark),
@@ -26,35 +26,34 @@ ThemeData themeLight = ThemeData(
         bodySmall: TextStyle(color: appPurpleDark),
         bodyMedium: TextStyle(color: appPurpleDark),
         bodyLarge: TextStyle(color: appPurpleDark)),
-    listTileTheme: ListTileThemeData(textColor: appPurpleDark),
-    tabBarTheme: TabBarTheme(
+    listTileTheme: const ListTileThemeData(textColor: appPurpleDark),
+    tabBarTheme: const TabBarTheme(
       indicatorColor: appPurpleDark,
       labelColor: appPurpleDark,
       unselectedLabelColor: Colors.grey,
     ));
 
 ThemeData themeDark = ThemeData(
-  brightness: Brightness.dark,
-  primaryColor: appPurpleLight2,
-  floatingActionButtonTheme:
-      FloatingActionButtonThemeData(backgroundColor: appWhite),
-  scaffoldBackgroundColor: appPurpleDark,
-  appBarTheme: AppBarTheme(
-    elevation: 0,
-    backgroundColor: appPurpleDark,
-  ),
-  textTheme: TextTheme(
-      titleLarge: TextStyle(color: appWhite),
-      headlineLarge: TextStyle(color: appWhite),
-      headlineMedium: TextStyle(color: appWhite),
-      headlineSmall: TextStyle(color: appWhite),
-      bodySmall: TextStyle(color: appWhite),
-      bodyMedium: TextStyle(color: appWhite),
-      bodyLarge: TextStyle(color: appWhite)),
-  listTileTheme: ListTileThemeData(textColor: appWhite),
-   tabBarTheme: TabBarTheme(
+    brightness: Brightness.dark,
+    primaryColor: appPurpleLight2,
+    floatingActionButtonTheme:
+        const FloatingActionButtonThemeData(backgroundColor: appWhite),
+    scaffoldBackgroundColor: appPurpleDark,
+    appBarTheme: const AppBarTheme(
+      elevation: 0,
+      backgroundColor: appPurpleDark,
+    ),
+    textTheme: const TextTheme(
+        titleLarge: TextStyle(color: appWhite),
+        headlineLarge: TextStyle(color: appWhite),
+        headlineMedium: TextStyle(color: appWhite),
+        headlineSmall: TextStyle(color: appWhite),
+        bodySmall: TextStyle(color: appWhite),
+        bodyMedium: TextStyle(color: appWhite),
+        bodyLarge: TextStyle(color: appWhite)),
+    listTileTheme: const ListTileThemeData(textColor: appWhite),
+    tabBarTheme: const TabBarTheme(
       indicatorColor: appWhite,
       labelColor: appWhite,
       unselectedLabelColor: Colors.grey,
-    )
-);
+    ));
