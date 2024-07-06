@@ -23,8 +23,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<Surah> allSurah = [];
   RxBool isDark = false.obs;
 
+  //surah
   Future<List<Surah>> getAllSurah() async {
     Uri url = Uri.parse('https://api.quran.gading.dev/surah');
     var res = await http.get(url);
@@ -32,7 +34,8 @@ class _MyHomePageState extends State<MyHomePage> {
     if (data == null || data.isEmpty) {
       return [];
     } else {
-      return data.map((e) => Surah.fromJson(e)).toList();
+      allSurah = data.map((e) => Surah.fromJson(e)).toList();
+      return allSurah;
     }
   }
 
@@ -65,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         actions: [
           IconButton(
-              onPressed: () => Get.to(SearchViews()), icon: Icon(Icons.search))
+              onPressed: () => Get.to(const SearchViews()), icon: Icon(Icons.search))
         ],
       ),
       body: DefaultTabController(
@@ -181,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemBuilder: (context, index) {
                             Surah surah = snapshot.data![index];
                             return ListTile(
-                              onTap: () => Get.to(() => DetailsurahView(),
+                              onTap: () => Get.to(() => const DetailsurahView(),
                                   arguments: surah),
                               leading: Obx(
                                 () => Container(
@@ -234,9 +237,31 @@ class _MyHomePageState extends State<MyHomePage> {
                           itemCount: snapshot.data!.length,
                           itemBuilder: (context, index) {
                             juz.Juz detailJuz = snapshot.data![index];
+                           String nameStart =  detailJuz.juzStartInfo?.split(" - ").first ?? "";
+                           String nameEnd =  detailJuz.juzEndInfo?.split(" - ").first ?? "";
+                           List<Surah> rawAllSurahInJuz = [];
+                           List<Surah> allSurahInJuz = [];
+                           for (Surah item in allSurah) {
+                            rawAllSurahInJuz.add(item);
+                             if(item.name.transliteration!.id == nameEnd){
+                              break;
+                             }
+                           }
+
+                           for (Surah item in rawAllSurahInJuz.reversed.toList()) {
+                            allSurahInJuz.add(item);
+                             if(item.name.transliteration!.id == nameStart){
+                              break;
+                             }
+                           }
+
+
                             return ListTile(
-                              onTap: () => Get.to(() => DetailjuzView(),
-                              arguments: detailJuz),
+                              onTap: () => Get.to(() => const DetailjuzView(),
+                              arguments: {
+                               "juz" : detailJuz,
+                               "surah" : allSurahInJuz.reversed.toList(),
+                                }),
                               leading: Obx(
                                 () => Container(
                                   height: 35,

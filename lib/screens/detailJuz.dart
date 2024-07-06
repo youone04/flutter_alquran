@@ -1,5 +1,6 @@
 import 'package:alquran/constants/color.dart';
 import 'package:alquran/data/models/juz.dart' as juz;
+import 'package:alquran/data/models/surah.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -23,10 +24,16 @@ class DetailjuzView extends StatefulWidget {
 }
 
 class _DetailJuzState extends State<DetailjuzView> {
-  final juz.Juz detailJuz = Get.arguments;
+  final juz.Juz detailJuz = Get.arguments["juz"];
+  final List<Surah> allSurahInThisJuz = Get.arguments["surah"];
+
 
   @override
   Widget build(BuildContext context) {
+    allSurahInThisJuz.forEach((element){
+      print(element.name.transliteration!.id);
+
+    });
     return Scaffold(
         appBar: AppBar(
           title: Text('JUZ ${detailJuz.juz}', 
