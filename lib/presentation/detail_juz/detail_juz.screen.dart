@@ -35,10 +35,78 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
             );
           }
           juz.Verses ayat = detailJuz.verses![index];
-          
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
+              if(ayat.number?.inSurah == 1)
+              GestureDetector(
+              onTap: () => Get.dialog(Dialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20)
+              ),
+              child: Container(
+                padding: const EdgeInsets.all(25),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                    color: Get.isDarkMode
+                    ? appPurpleLight2.withOpacity(0.3)
+                    : appWhite,
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Text(
+                      "Tafsir Surah Ayat 1",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20
+                    ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Text(
+                      "${ayat.tafsir?.id?.short ?? "-"}",
+                      textAlign: TextAlign.left,
+                    )
+                  ],
+                ),
+              ),
+            )),
+            child: Container(
+              width: Get.width,
+              margin: EdgeInsets.only(bottom: 20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                gradient: const LinearGradient(
+                  colors: [appPurpleLight2, appPurpleLight1],
+                ),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                     Text(
+                      "﻿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: appWhite),
+                    ),
+                    Text(
+                      "Bismillaahir Rahmaanir Raheem",
+                      style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                          color: appWhite),
+                    ),
+                    SizedBox(height: 10),
+                    
+                  ],
+                ),
+              ),
+            ),
+          ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -114,7 +182,7 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
               ),
               Text(
                 "${ayat.translation?.id}",
-                textAlign: TextAlign.justify,
+                textAlign: TextAlign.left,
                 style: const TextStyle(
                   fontSize: 18,
                 ),

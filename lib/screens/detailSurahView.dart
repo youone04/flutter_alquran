@@ -57,7 +57,7 @@ class DetailsurahView extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "Tafsir ${surah?.name?.transliteration?.id ?? '-'}",
+                      "Tafsir ${surah.name.transliteration?.id ?? '-'}",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20
@@ -86,7 +86,7 @@ class DetailsurahView extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "${surah?.name?.transliteration?.id?.toUpperCase() ?? '-'}",
+                      "${surah.name.transliteration?.id?.toUpperCase() ?? '-'}",
                       style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
@@ -101,7 +101,7 @@ class DetailsurahView extends StatelessWidget {
                     ),
                     SizedBox(height: 10),
                     Text(
-                      "${surah?.numberOfVerses ?? '-'} Ayat | ${surah.revelation?.id}",
+                      "${surah.numberOfVerses} Ayat | ${surah.revelation.id}",
                       style: const TextStyle(fontSize: 16, color: appWhite),
                     )
                   ],
@@ -125,12 +125,12 @@ class DetailsurahView extends StatelessWidget {
               return ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: snapshot.data!.verses!.length ?? 0,
+                itemCount: snapshot.data!.verses.length,
                 itemBuilder: (context, index) {
                   if (snapshot?.data?.verses?.length == 0) {
                     return const SizedBox();
                   }
-                  detail.Verse? ayat = snapshot?.data?.verses![index];
+                  detail.Verse? ayat = snapshot.data?.verses[index];
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
@@ -179,7 +179,7 @@ class DetailsurahView extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20),
                         child: Text(
-                          "${ayat?.text?.arab}",
+                          "${ayat?.text.arab}",
                           textAlign: TextAlign.end,
                           style: const TextStyle(fontSize: 25),
                         ),
@@ -188,7 +188,7 @@ class DetailsurahView extends StatelessWidget {
                         height: 10,
                       ),
                       Text(
-                        "${ayat?.text?.transliteration?.en}",
+                        "${ayat?.text.transliteration.en}",
                         textAlign: TextAlign.end,
                         style: const TextStyle(
                             fontSize: 18, fontStyle: FontStyle.italic),
@@ -197,8 +197,8 @@ class DetailsurahView extends StatelessWidget {
                         height: 25,
                       ),
                       Text(
-                        "${ayat?.translation?.id}",
-                        textAlign: TextAlign.justify,
+                        "${ayat?.translation.id}",
+                        textAlign: TextAlign.left,
                         style: const TextStyle(
                           fontSize: 18,
                         ),
