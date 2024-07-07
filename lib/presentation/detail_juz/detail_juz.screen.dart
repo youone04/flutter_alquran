@@ -13,7 +13,13 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
 
   @override
   Widget build(BuildContext context) {
-  
+    int index = 0;
+    detailJuz.verses?.forEach((element) {
+      if (element.number?.inSurah == 1) {
+        element.nameSurah = allSurahInThisJuz[index].name.transliteration!.id;
+        index++;
+      }
+    });
     return Scaffold(
       appBar: AppBar(
         title: Text('JUZ - ${detailJuz.juz}',
@@ -39,75 +45,71 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              if(ayat.number?.inSurah == 1)
-              GestureDetector(
-              onTap: () => Get.dialog(Dialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20)
-              ),
-              child: Container(
-                padding: const EdgeInsets.all(25),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                    color: Get.isDarkMode
-                    ? appPurpleLight2.withOpacity(0.3)
-                    : appWhite,
+              if (ayat.number?.inSurah == 1)
+                GestureDetector(
+                  onTap: () => Get.dialog(Dialog(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Container(
+                      padding: const EdgeInsets.all(25),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Get.isDarkMode
+                            ? appPurpleLight2.withOpacity(0.3)
+                            : appWhite,
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text(
+                            "Tafsir Surah Ayat 1",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "${ayat.tafsir?.id?.short ?? "-"}",
+                            textAlign: TextAlign.left,
+                          )
+                        ],
+                      ),
+                    ),
+                  )),
+                  child: Container(
+                    width: Get.width,
+                    margin: EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      gradient: const LinearGradient(
+                        colors: [appPurpleLight2, appPurpleLight1],
+                      ),
+                    ),
+                    child: const Padding(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Text(
+                            "﻿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: appWhite),
+                          ),
+                          Text(
+                            "Bismillaahir Rahmaanir Raheem",
+                            style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: appWhite),
+                          ),
+                          SizedBox(height: 10),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      "Tafsir Surah Ayat 1",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Text(
-                      "${ayat.tafsir?.id?.short ?? "-"}",
-                      textAlign: TextAlign.left,
-                    )
-                  ],
-                ),
-              ),
-            )),
-            child: Container(
-              width: Get.width,
-              margin: EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                gradient: const LinearGradient(
-                  colors: [appPurpleLight2, appPurpleLight1],
-                ),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.all(20),
-                child: Column(
-                  children: [
-                     Text(
-                      "﻿بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: appWhite),
-                    ),
-                    Text(
-                      "Bismillaahir Rahmaanir Raheem",
-                      style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                          color: appWhite),
-                    ),
-                    SizedBox(height: 10),
-                    
-                  ],
-                ),
-              ),
-            ),
-          ),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
@@ -137,12 +139,11 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
                             child:
                                 Center(child: Text("${ayat.number!.inSurah}")),
                           ),
-                          // Text("${allSurahInThisJuz[0]?.name?.transliteration?.id ?? '-'}",
-                          // style: const TextStyle(
-                          //   fontStyle: FontStyle.italic,
-                          //   fontSize: 16
-                          // ),
-                          // )
+                          Text(
+                            "${ayat.number?.inSurah == 1 ? ayat.nameSurah: ''}",
+                            style: const TextStyle(
+                                fontStyle: FontStyle.italic, fontSize: 16),
+                          )
                         ],
                       ),
                       Row(

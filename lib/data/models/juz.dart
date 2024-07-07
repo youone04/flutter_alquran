@@ -8,7 +8,8 @@ class Juz {
   List<Verses>? verses;
 
   Juz(
-      {this.juz,
+      {
+      this.juz,
       this.juzStartSurahNumber,
       this.juzEndSurahNumber,
       this.juzStartInfo,
@@ -63,9 +64,12 @@ class Verses {
   Translation? translation;
   Audio? audio;
   Tafsir? tafsir;
+  String? nameSurah;
 
   Verses(
-      {this.number,
+      {
+      this.nameSurah = '-',
+      this.number,
       this.meta,
       this.text,
       this.translation,
@@ -105,6 +109,7 @@ class Verses {
     if (this.tafsir != null) {
       data['tafsir'] = this.tafsir!.toJson();
     }
+    data['nameSurah'] = this.nameSurah;
     return data;
   }
 }
