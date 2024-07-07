@@ -7,7 +7,7 @@ import 'package:alquran/presentation/home/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-//https://www.youtube.com/watch?v=kVTpY_h8m78&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=24
+//https://www.youtube.com/watch?v=4rI8FnU2vmM&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=25
 //https://github.com/gadingnst/quran-api
 void main() async {
   await GetStorage.init();

@@ -8,6 +8,7 @@ import 'package:just_audio/just_audio.dart';
 
 class DetailSurahController extends GetxController {
   // RxString kondisiAudio = "stop".obs;
+  detail.Verse? lastVerse;
 
   //get detail surah
   final player = AudioPlayer();
@@ -24,11 +25,18 @@ class DetailSurahController extends GetxController {
   //play audio
   void playAudio(detail.Verse? ayat) async {
     if (ayat?.audio.primary != null) {
+      if (lastVerse == null) {
+        lastVerse = ayat;
+      }
       //proses
       // Catching errors at load time
       try {
+        lastVerse!.kondisiAudio = "stop";
+        lastVerse = ayat;
+        lastVerse!.kondisiAudio = "stop";
+        update();
         await player.stop();
-        await player.setUrl(ayat!.audio.primary );
+        await player.setUrl(ayat!.audio.primary);
         ayat.kondisiAudio = "playing";
         update();
         await player.play();
@@ -110,7 +118,7 @@ class DetailSurahController extends GetxController {
   }
 
   //stop audio
-  void stopAudio(detail.Verse? ayat) async{
+  void stopAudio(detail.Verse? ayat) async {
     try {
       await player.stop();
       ayat?.kondisiAudio = "stop";
