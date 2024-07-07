@@ -5,25 +5,20 @@ import 'package:alquran/presentation/home/home.screen.dart';
 // import 'package:alquran/screens/introduction.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 //https://www.youtube.com/watch?v=OlskR7gyYJM&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=20
 //https://github.com/gadingnst/quran-api
-void main() {
-  // The HomeController is instantiated immediately
+void main() async {
+  await GetStorage.init();
+  final box = GetStorage();
   Get.put(HomeController());
   Get.put(DetailJuzController());
-  runApp(MyApp());
+  runApp(GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: box.read('themeDark') == null ? themeLight : themeDark,
+      home: const HomeScreen(),
+    ));
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return  GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: themeLight,
-      darkTheme: themeDark,
-      home: const HomeScreen(),
-    );
-  }
-}
 
 

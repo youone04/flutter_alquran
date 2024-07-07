@@ -26,7 +26,7 @@ class _TabBarExampleState extends State<TabBarExample> {
   int _currentIndex = 0;
   final List<Widget> _children = [
     Center(
-      child: MyApp(),
+      child: Text(""),
     ),
     Center(
       child: Text("It's rainy here"),

@@ -13,6 +13,16 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
 
   @override
   Widget build(BuildContext context) {
+  //  List<Map<String, dynamic>> updatedVerses = [
+  //   for (var verse in detailJuz)
+  //     {
+  //       ...verse,
+  //       "name": 'surahName',
+  //     }
+  // ];
+
+  // print(updatedVerses);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('JUZ - ${detailJuz.juz}',

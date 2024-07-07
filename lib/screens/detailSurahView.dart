@@ -14,7 +14,6 @@ class DetailsurahView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Surah surah = Get?.arguments;
-    print(surah);
     const String title = "Detail Surah";
     String id = surah.number.toString();
     Future<detail.DetailSurah> getAllDetailSurah() async {
