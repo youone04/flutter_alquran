@@ -7,14 +7,14 @@ import 'package:alquran/presentation/home/home.screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-//https://www.youtube.com/watch?v=OlskR7gyYJM&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=20
+//https://www.youtube.com/watch?v=jdtP2fvH3KU&list=PL7jdfftn7HKvWLVrADa7UX-A_6E3859Xi&index=23
 //https://github.com/gadingnst/quran-api
 void main() async {
   await GetStorage.init();
   final box = GetStorage();
   Get.put(HomeController());
   Get.put(DetailJuzController());
-   Get.put(DetailSurahController());
+  Get.put(DetailSurahController());
 
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,

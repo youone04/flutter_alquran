@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:just_audio/just_audio.dart';
 
 class DetailSurahController extends GetxController {
+  RxString kondisiAudio = "stop".obs;
+
   //get detail surah
   final player = AudioPlayer();
 
@@ -24,8 +26,12 @@ class DetailSurahController extends GetxController {
       //proses
       // Catching errors at load time
       try {
+        await player.stop();
         await player.setUrl(url);
+        kondisiAudio.value = "playing";
         await player.play();
+        kondisiAudio.value = "stop";
+        await player.stop();
       } on PlayerException catch (e) {
         Get.defaultDialog(
             title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
@@ -57,6 +63,65 @@ class DetailSurahController extends GetxController {
           title: "Terjadi Kesalahan", middleText: "URL Audio tidak valid");
     }
   }
+
+  //pause audio
+  void pauseAudio() async {
+    try {
+      await player.pause();
+      kondisiAudio.value = "pause";
+    } on PlayerException catch (e) {
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
+    } on PlayerInterruptedException catch (e) {
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
+    } catch (e) {
+      // Fallback for all other errors
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan",
+          middleText: "Fallback for all other errors");
+    }
+  }
+
+  //resume audio
+  void resumeAudio() async {
+    try {
+      kondisiAudio.value = "playing";
+      await player.play();
+      kondisiAudio.value = "stop";
+    } on PlayerException catch (e) {
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
+    } on PlayerInterruptedException catch (e) {
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
+    } catch (e) {
+      // Fallback for all other errors
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan",
+          middleText: "Fallback for all other errors");
+    }
+  }
+
+  //stop audio
+  void stopAudio() async{
+    try {
+      await player.stop();
+      kondisiAudio.value = "stop";
+    } on PlayerException catch (e) {
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
+    } on PlayerInterruptedException catch (e) {
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
+    } catch (e) {
+      // Fallback for all other errors
+      Get.defaultDialog(
+          title: "Terjadi Kesalahan",
+          middleText: "Fallback for all other errors");
+    }
+  }
+
   @override
   void onClose() {
     player.stop();
