@@ -1,5 +1,6 @@
 import 'package:alquran/constants/color.dart';
 import 'package:alquran/presentation/detail_juz/controllers/detail_juz.controller.dart';
+import 'package:alquran/presentation/detail_surah/controller/detail_surah.controller.dart';
 import 'package:alquran/presentation/home/controllers/home.controller.dart';
 import 'package:alquran/presentation/home/home.screen.dart';
 // import 'package:alquran/screens/introduction.dart';
@@ -13,6 +14,8 @@ void main() async {
   final box = GetStorage();
   Get.put(HomeController());
   Get.put(DetailJuzController());
+   Get.put(DetailSurahController());
+
   runApp(GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: box.read('themeDark') == null ? themeLight : themeDark,

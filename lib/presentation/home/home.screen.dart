@@ -1,15 +1,12 @@
 import 'package:alquran/constants/color.dart';
 import 'package:alquran/data/models/surah.dart';
 import 'package:alquran/presentation/detail_juz/detail_juz.screen.dart';
-import 'package:alquran/screens/detailSurahView.dart';
+import 'package:alquran/presentation/detail_surah/detail_surah.screen.dart';
 import 'package:alquran/screens/lastRead.dart';
 import 'package:alquran/screens/search.dart';
 import 'package:flutter/material.dart';
 import 'package:alquran/data/models/juz.dart' as juz;
-
-
 import 'package:get/get.dart';
-
 import 'controllers/home.controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
@@ -141,7 +138,7 @@ class HomeScreen extends GetView<HomeController> {
                           itemBuilder: (context, index) {
                             Surah surah = snapshot.data![index];
                             return ListTile(
-                              onTap: () => Get.to(() => const DetailsurahView(),
+                              onTap: () => Get.to(() => DetailJSurahScreen(),
                                   arguments: surah),
                               leading: Obx(
                                 () => Container(

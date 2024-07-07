@@ -1,33 +1,19 @@
 import 'package:alquran/constants/color.dart';
+import 'package:alquran/presentation/detail_surah/controller/detail_surah.controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:alquran/data/models/detail_surah.dart' as detail;
 import 'package:alquran/data/models/surah.dart';
-// import 'package:get/get_core/get_core.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-// import 'package:get/get.dart';
 
-class DetailsurahView extends StatelessWidget {
-  const DetailsurahView({super.key});
+class DetailJSurahScreen extends GetView<DetailSurahController> {
+  final Surah surah = Get?.arguments;
 
   @override
   Widget build(BuildContext context) {
-    final Surah surah = Get?.arguments;
-    const String title = "Detail Surah";
-    String id = surah.number.toString();
-    Future<detail.DetailSurah> getAllDetailSurah() async {
-      Uri url = Uri.parse('https://api.quran.gading.dev/surah/$id');
-      // print(url);
-      var res = await http.get(url);
-      Map<String, dynamic> data =
-          (json.decode(res.body) as Map<String, dynamic>)["data"];
-      return detail.DetailSurah.fromJson(data);
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text(title, style: TextStyle(color: Colors.white)),
+        title:
+            const Text("Detail Surah", style: TextStyle(color: Colors.white)),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(color: Colors.white, Icons.arrow_back_ios),
@@ -42,15 +28,14 @@ class DetailsurahView extends StatelessWidget {
           GestureDetector(
             onTap: () => Get.dialog(Dialog(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20)
-              ),
+                  borderRadius: BorderRadius.circular(20)),
               child: Container(
                 padding: const EdgeInsets.all(25),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                    color: Get.isDarkMode
-                    ? appPurpleLight2.withOpacity(0.3)
-                    : appWhite,
+                  color: Get.isDarkMode
+                      ? appPurpleLight2.withOpacity(0.3)
+                      : appWhite,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -58,9 +43,7 @@ class DetailsurahView extends StatelessWidget {
                     Text(
                       "Tafsir ${surah.name.transliteration?.id ?? '-'}",
                       style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20
-                    ),
+                          fontWeight: FontWeight.bold, fontSize: 20),
                     ),
                     const SizedBox(
                       height: 20,
@@ -108,9 +91,9 @@ class DetailsurahView extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           FutureBuilder<detail.DetailSurah>(
-            future: getAllDetailSurah(),
+            future: controller.getAllDetailSurah(surah.number.toString()),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(
@@ -118,7 +101,8 @@ class DetailsurahView extends StatelessWidget {
                 );
               }
               if (!snapshot.hasData) {
-                return const Center(child: Text("Tidak ada data"),
+                return const Center(
+                  child: Text("Tidak ada data"),
                 );
               }
               return ListView.builder(
@@ -160,12 +144,16 @@ class DetailsurahView extends StatelessWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
-                                      icon: const Icon(
-                                          Icons.bookmark_add_outlined)),
+                                    onPressed: () {},
+                                    icon:
+                                        const Icon(Icons.bookmark_add_outlined),
+                                  ),
                                   IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(Icons.play_arrow)),
+                                    onPressed: () {
+                                      controller.playAudio(ayat?.audio.primary);
+                                    },
+                                    icon: Icon(Icons.play_arrow),
+                                  ),
                                 ],
                               ),
                             ],
