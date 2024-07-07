@@ -1,3 +1,4 @@
+import 'package:alquran/data/models/juz.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -6,7 +7,7 @@ import 'dart:convert';
 import 'package:just_audio/just_audio.dart';
 
 class DetailSurahController extends GetxController {
-  RxString kondisiAudio = "stop".obs;
+  // RxString kondisiAudio = "stop".obs;
 
   //get detail surah
   final player = AudioPlayer();
@@ -21,16 +22,18 @@ class DetailSurahController extends GetxController {
   }
 
   //play audio
-  void playAudio(String? url) async {
-    if (url != null) {
+  void playAudio(detail.Verse? ayat) async {
+    if (ayat?.audio.primary != null) {
       //proses
       // Catching errors at load time
       try {
         await player.stop();
-        await player.setUrl(url);
-        kondisiAudio.value = "playing";
+        await player.setUrl(ayat!.audio.primary );
+        ayat.kondisiAudio = "playing";
+        update();
         await player.play();
-        kondisiAudio.value = "stop";
+        ayat.kondisiAudio = "stop";
+        update();
         await player.stop();
       } on PlayerException catch (e) {
         Get.defaultDialog(
@@ -65,10 +68,11 @@ class DetailSurahController extends GetxController {
   }
 
   //pause audio
-  void pauseAudio() async {
+  void pauseAudio(detail.Verse? ayat) async {
     try {
       await player.pause();
-      kondisiAudio.value = "pause";
+      ayat?.kondisiAudio = "pause";
+      update();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
@@ -84,11 +88,13 @@ class DetailSurahController extends GetxController {
   }
 
   //resume audio
-  void resumeAudio() async {
+  void resumeAudio(detail.Verse? ayat) async {
     try {
-      kondisiAudio.value = "playing";
+      ayat?.kondisiAudio = "playing";
+      update();
       await player.play();
-      kondisiAudio.value = "stop";
+      ayat?.kondisiAudio = "stop";
+      update();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");
@@ -104,10 +110,11 @@ class DetailSurahController extends GetxController {
   }
 
   //stop audio
-  void stopAudio() async{
+  void stopAudio(detail.Verse? ayat) async{
     try {
       await player.stop();
-      kondisiAudio.value = "stop";
+      ayat?.kondisiAudio = "stop";
+      update();
     } on PlayerException catch (e) {
       Get.defaultDialog(
           title: "Terjadi Kesalahan", middleText: "${e.message.toString()}");

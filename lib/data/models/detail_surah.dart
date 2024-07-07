@@ -139,6 +139,7 @@ class DetailSurahTafsir {
 }
 
 class Verse {
+    String kondisiAudio;
     Number number;
     Meta meta;
     Text text;
@@ -147,6 +148,7 @@ class Verse {
     VerseTafsir tafsir;
 
     Verse({
+        this.kondisiAudio = "stop",
         required this.number,
         required this.meta,
         required this.text,
@@ -155,6 +157,7 @@ class Verse {
         required this.tafsir,
     });
 
+  //data dari databse
     factory Verse.fromJson(Map<String, dynamic> json) => Verse(
         number: Number.fromJson(json["number"]),
         meta: Meta.fromJson(json["meta"]),
@@ -171,6 +174,8 @@ class Verse {
         "translation": translation.toJson(),
         "audio": audio.toJson(),
         "tafsir": tafsir.toJson(),
+        "kondisiAudio" : kondisiAudio
+
     };
 }
 
