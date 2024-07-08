@@ -1,5 +1,6 @@
 import 'package:alquran/constants/color.dart';
 import 'package:alquran/data/models/surah.dart';
+import 'package:alquran/presentation/detail_juz/controllers/detail_juz.controller.dart';
 import 'package:alquran/presentation/detail_juz/detail_juz.screen.dart';
 import 'package:alquran/presentation/detail_surah/controller/detail_surah.controller.dart';
 import 'package:alquran/presentation/detail_surah/detail_surah.screen.dart';
@@ -215,11 +216,14 @@ class HomeScreen extends GetView<HomeController> {
                              }
                            }
                             return ListTile(
-                              onTap: () => Get.to(() => DetailJuzScreen(),
+                              onTap: () => {
+                              Get.put(DetailJuzController()),
+                              Get.to(() => DetailJuzScreen(),
                               arguments: {
                                "juz" : detailJuz,
                                "surah" : allSurahInJuz.reversed.toList(),
-                                }),
+                                })
+                              },
                               leading: Obx(
                                 () => Container(
                                   height: 35,

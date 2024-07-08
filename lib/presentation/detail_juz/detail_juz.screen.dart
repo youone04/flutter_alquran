@@ -19,6 +19,7 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
         element.nameSurah = allSurahInThisJuz[index].name.transliteration!.id;
         index++;
       }
+      element.kondisiAudio = 'stop';
     });
     return Scaffold(
       appBar: AppBar(
@@ -28,6 +29,7 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
         leading: IconButton(
           icon: const Icon(color: Colors.white, Icons.arrow_back_ios),
           onPressed: () {
+            Get.delete<DetailJuzController>();
             Navigator.pop(context);
           },
         ),
@@ -36,12 +38,13 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
         padding: const EdgeInsets.all(20),
         itemCount: detailJuz.verses?.length ?? 0,
         itemBuilder: (context, index) {
-          if (detailJuz.verses == null || detailJuz.verses?.length == 0) {
+          if (detailJuz.verses == null || detailJuz.verses!.length == 0) {
             return const Center(
               child: Text("Tidak ada data"),
             );
           }
           juz.Verses ayat = detailJuz.verses![index];
+          print(index);
           return Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
@@ -79,7 +82,7 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
                   )),
                   child: Container(
                     width: Get.width,
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       gradient: const LinearGradient(
@@ -140,20 +143,53 @@ class DetailJuzScreen extends GetView<DetailJuzController> {
                                 Center(child: Text("${ayat.number!.inSurah}")),
                           ),
                           Text(
-                            "${ayat.number?.inSurah == 1 ? ayat.nameSurah: ''}",
+                            "${ayat.number?.inSurah == 1 ? ayat.nameSurah : ''}",
                             style: const TextStyle(
                                 fontStyle: FontStyle.italic, fontSize: 16),
                           )
                         ],
                       ),
-                      Row(
-                        children: [
-                          IconButton(
+                      GetBuilder<DetailJuzController>(
+                        builder: (c) => Row(
+                          children: [
+                            IconButton(
                               onPressed: () {},
-                              icon: const Icon(Icons.bookmark_add_outlined)),
-                          IconButton(
-                              onPressed: () {}, icon: Icon(Icons.play_arrow)),
-                        ],
+                              icon: const Icon(Icons.bookmark_add_outlined),
+                            ),
+                            (ayat.kondisiAudio == "stop")
+                                ? IconButton(
+                                    onPressed: () {
+                                      c.playAudio(ayat);
+                                    },
+                                    icon: const Icon(Icons.play_arrow),
+                                  )
+                                : Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      (ayat.kondisiAudio == "playing")
+                                          ? IconButton(
+                                              onPressed: () {
+                                                c.pauseAudio(ayat);
+                                              },
+                                              icon: const Icon(Icons.pause),
+                                            )
+                                          : IconButton(
+                                              onPressed: () {
+                                                c.resumeAudio(ayat);
+                                              },
+                                              icon:
+                                                  const Icon(Icons.play_arrow),
+                                            ),
+                                      IconButton(
+                                        onPressed: () {
+                                          c.stopAudio(ayat);
+                                        },
+                                        icon: const Icon(Icons.stop),
+                                      )
+                                    ],
+                                  ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

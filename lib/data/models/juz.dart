@@ -65,9 +65,12 @@ class Verses {
   Audio? audio;
   Tafsir? tafsir;
   String? nameSurah;
+  String? kondisiAudio;
+
 
   Verses(
       {
+      this.kondisiAudio = 'stop',
       this.nameSurah = '-',
       this.number,
       this.meta,
@@ -78,15 +81,14 @@ class Verses {
 
   Verses.fromJson(Map<String, dynamic> json) {
     number =
-        json['number'] != null ? new Number.fromJson(json['number']) : null;
+    json['number'] != null ? new Number.fromJson(json['number']) : null;
     meta = json['meta'] != null ? new Meta.fromJson(json['meta']) : null;
     text = json['text'] != null ? new Text.fromJson(json['text']) : null;
     translation = json['translation'] != null
         ? new Translation.fromJson(json['translation'])
         : null;
     audio = json['audio'] != null ? new Audio.fromJson(json['audio']) : null;
-    tafsir =
-        json['tafsir'] != null ? new Tafsir.fromJson(json['tafsir']) : null;
+    tafsir = json['tafsir'] != null ? new Tafsir.fromJson(json['tafsir']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -110,6 +112,7 @@ class Verses {
       data['tafsir'] = this.tafsir!.toJson();
     }
     data['nameSurah'] = this.nameSurah;
+    data['kondisiAudio'] = this.kondisiAudio;
     return data;
   }
 }

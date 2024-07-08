@@ -115,6 +115,7 @@ class DetailJSurahScreen extends GetView<DetailSurahController> {
                     return const SizedBox();
                   }
                   detail.Verse? ayat = snapshot.data?.verses[index];
+                   print(ayat?.kondisiAudio);
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [

@@ -1,4 +1,3 @@
-import 'package:alquran/data/models/juz.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
