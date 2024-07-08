@@ -1,6 +1,7 @@
 import 'package:alquran/constants/color.dart';
 import 'package:alquran/data/models/surah.dart';
 import 'package:alquran/presentation/detail_juz/detail_juz.screen.dart';
+import 'package:alquran/presentation/detail_surah/controller/detail_surah.controller.dart';
 import 'package:alquran/presentation/detail_surah/detail_surah.screen.dart';
 import 'package:alquran/screens/lastRead.dart';
 import 'package:alquran/screens/search.dart';
@@ -11,6 +12,7 @@ import 'controllers/home.controller.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({Key? key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +24,7 @@ class HomeScreen extends GetView<HomeController> {
         ),
         actions: [
           IconButton(
-              onPressed: () => Get.to(const SearchViews()), icon: Icon(Icons.search))
+              onPressed: () => Get.to(const SearchViews()), icon: const Icon(Icons.search))
         ],
       ),
       body: DefaultTabController(
@@ -138,8 +140,12 @@ class HomeScreen extends GetView<HomeController> {
                           itemBuilder: (context, index) {
                             Surah surah = snapshot.data![index];
                             return ListTile(
-                              onTap: () => Get.to(() => DetailJSurahScreen(),
-                                  arguments: surah),
+                              onTap: () => {
+                                      Get.put(DetailSurahController()),
+                                      Get.to(() => DetailJSurahScreen(),
+                                  arguments: surah)
+
+                              },
                               leading: Obx(
                                 () => Container(
                                   height: 35,

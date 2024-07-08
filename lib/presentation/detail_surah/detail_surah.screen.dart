@@ -18,6 +18,7 @@ class DetailJSurahScreen extends GetView<DetailSurahController> {
         leading: IconButton(
           icon: const Icon(color: Colors.white, Icons.arrow_back_ios),
           onPressed: () {
+            Get.delete<DetailSurahController>();
             Navigator.pop(context);
           },
         ),
